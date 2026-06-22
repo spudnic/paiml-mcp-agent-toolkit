@@ -226,7 +226,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fe1ae8348e072c21b54e41190ce592d2f7a3ce56da3fd886eb380f0b30d462f3"
 dependencies = [
  "anyhow",
- "aprender-common",
+ "aprender-common 0.50.0",
  "aprender-compute 0.50.0",
  "aprender-contracts",
  "aprender-core 0.50.0",
@@ -295,7 +295,7 @@ dependencies = [
  "rmp-serde",
  "serde",
  "serde_json",
- "trueno 0.14.6",
+ "trueno",
  "trueno-quant",
 ]
 
@@ -306,7 +306,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d74c91c06c8607e680200511772ba9417da7b53bc29fd687e748a752c10776aa"
 dependencies = [
  "apr-cli",
- "aprender-core 0.49.0",
+ "aprender-core 0.50.0",
 ]
 
 [[package]]
@@ -314,6 +314,16 @@ name = "aprender-common"
 version = "0.50.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6c1c9f6ff5bf9e846e4a344e0d2125e82f3603fb1bdd8384e7df5321e0cfe944"
+dependencies = [
+ "lz4_flex 0.11.6",
+ "zstd",
+]
+
+[[package]]
+name = "aprender-common"
+version = "0.51.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bebc5ac5949a252f72fbd9e399df887d261da98c59def43202974a3780540417"
 dependencies = [
  "lz4_flex 0.11.6",
  "zstd",
@@ -385,6 +395,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "aprender-compute"
+version = "0.51.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "85d1db47a775c6b9a1304932710c524e6e3daf0386f8e162c1b627265da42ef8"
+dependencies = [
+ "anyhow",
+ "aprender-gemm-codegen 0.51.0",
+ "aprender-quant 0.51.0",
+ "chrono",
+ "hostname",
+ "num_cpus",
+ "provable-contracts-macros 0.3.1",
+ "serde",
+ "serde_json",
+ "serde_yaml_ng",
+ "thiserror 2.0.18",
+ "toml 0.8.23",
+]
+
+[[package]]
 name = "aprender-contracts"
 version = "0.50.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -411,35 +441,11 @@ dependencies = [
 
 [[package]]
 name = "aprender-core"
-version = "0.49.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5c7db3a6cb63d5394a06b5774bff5ce0c0b50c36feb0de1bfa1486ba135b7419"
-dependencies = [
- "batuta-common",
- "bincode",
- "getrandom 0.2.17",
- "memmap2",
- "minijinja",
- "provable-contracts-macros 0.3.1",
- "rand 0.9.4",
- "rand_chacha 0.9.0",
- "rayon",
- "rmp-serde",
- "serde",
- "serde_json",
- "serde_yaml_ng",
- "tempfile",
- "trueno 0.17.5",
- "trueno-quant",
-]
-
-[[package]]
-name = "aprender-core"
 version = "0.50.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "83d4119a26ca1b6f193383132947d44740fce1efc9664b4eaf9df34d3e3b4f41"
 dependencies = [
- "aprender-common",
+ "aprender-common 0.50.0",
  "aprender-compute 0.50.0",
  "aprender-quant 0.50.0",
  "bincode",
@@ -463,6 +469,30 @@ dependencies = [
  "tempfile",
  "ureq 2.12.1",
  "zstd",
+]
+
+[[package]]
+name = "aprender-core"
+version = "0.51.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ec2cfb8b3f3b525f6a8f98e4b61e5bb741bb187cb8e79e022909189c6ac0adac"
+dependencies = [
+ "aprender-common 0.51.0",
+ "aprender-compute 0.51.0",
+ "aprender-quant 0.51.0",
+ "bincode",
+ "getrandom 0.2.17",
+ "memmap2",
+ "minijinja",
+ "provable-contracts-macros 0.3.1",
+ "rand 0.9.4",
+ "rand_chacha 0.9.0",
+ "rayon",
+ "rmp-serde",
+ "serde",
+ "serde_json",
+ "serde_yaml_ng",
+ "tempfile",
 ]
 
 [[package]]
@@ -501,7 +531,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cabd469f3db3026aa30b6b52b493fc6c2fbefc40361cf54f7054c1e6afbeedd0"
 dependencies = [
  "anyhow",
- "aprender-common",
+ "aprender-common 0.50.0",
  "aprender-compute 0.50.0",
  "arrow",
  "axum 0.7.9",
@@ -528,6 +558,39 @@ dependencies = [
  "wasm-bindgen-futures",
  "web-sys",
  "wgpu 22.1.0",
+]
+
+[[package]]
+name = "aprender-db"
+version = "0.51.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fbe2f26115051d36a73e397c6fe97f500810a2034e3028600d5a0da45d002e43"
+dependencies = [
+ "anyhow",
+ "aprender-common 0.51.0",
+ "aprender-compute 0.51.0",
+ "arrow",
+ "axum 0.7.9",
+ "chrono",
+ "clap",
+ "console_error_panic_hook",
+ "dashmap",
+ "js-sys",
+ "parquet",
+ "rayon",
+ "rustc-hash 2.1.2",
+ "serde",
+ "serde-wasm-bindgen",
+ "serde_json",
+ "serde_yaml_ng",
+ "sqlparser",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
 ]
 
 [[package]]
@@ -564,6 +627,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "aprender-gemm-codegen"
+version = "0.51.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a50433d206667a18eaba87cb53bae444490456a1914031d32a15335699632ba4"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.117",
+]
+
+[[package]]
 name = "aprender-graph"
 version = "0.50.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -572,9 +646,23 @@ dependencies = [
  "anyhow",
  "aprender-compute 0.50.0",
  "aprender-core 0.50.0",
- "aprender-db",
+ "aprender-db 0.50.0",
  "arrow",
  "parquet",
+ "thiserror 2.0.18",
+ "tokio",
+]
+
+[[package]]
+name = "aprender-graph"
+version = "0.51.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "841b3fcf3a3eca1d8b52a41121262663709742435eed633606e7e7fd729520fa"
+dependencies = [
+ "anyhow",
+ "aprender-compute 0.51.0",
+ "aprender-core 0.51.0",
+ "aprender-db 0.51.0",
  "thiserror 2.0.18",
  "tokio",
 ]
@@ -600,9 +688,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "884884a21724d710f194254ca45044618587a399283cc42eb9e517cecca75996"
 dependencies = [
  "anyhow",
- "aprender-common",
- "aprender-db",
- "aprender-graph",
+ "aprender-common 0.50.0",
+ "aprender-db 0.50.0",
+ "aprender-graph 0.50.0",
  "aprender-rag",
  "aprender-registry",
  "aprender-serve",
@@ -727,8 +815,8 @@ dependencies = [
  "anyhow",
  "aprender-compute 0.50.0",
  "aprender-core 0.50.0",
- "aprender-db",
- "aprender-graph",
+ "aprender-db 0.50.0",
+ "aprender-graph 0.50.0",
  "aprender-profile-core",
  "aprender-viz",
  "backtrace",
@@ -800,14 +888,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "aprender-quant"
+version = "0.51.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "123744c9fb4a17984ff389fce9e444a2c0b1c5dd108b4753348cb3eed1ce8913"
+dependencies = [
+ "half",
+]
+
+[[package]]
 name = "aprender-rag"
 version = "0.50.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "00aaa4d04f350ef947b8cd3324edfebc9267392f876949247d41d643d82248ca"
 dependencies = [
- "aprender-common",
+ "aprender-common 0.50.0",
  "aprender-compute 0.50.0",
- "aprender-db",
+ "aprender-db 0.50.0",
  "async-trait",
  "rusqlite",
  "serde",
@@ -972,9 +1069,9 @@ version = "0.50.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b548321b2ffe3c82fadabfa0a4134479e3b10b0b7815bb26a43a94cbd91bfb30"
 dependencies = [
- "aprender-common",
+ "aprender-common 0.50.0",
  "aprender-compute 0.50.0",
- "aprender-graph",
+ "aprender-graph 0.50.0",
  "base64",
  "libc",
  "png",
@@ -6214,7 +6311,7 @@ dependencies = [
 
 [[package]]
 name = "pmat"
-version = "3.19.2"
+version = "3.20.0"
 dependencies = [
  "actix",
  "actix-rt",
@@ -6223,8 +6320,8 @@ dependencies = [
  "aprender-compute 0.50.0",
  "aprender-contracts",
  "aprender-contracts-macros",
- "aprender-db",
- "aprender-graph",
+ "aprender-db 0.50.0",
+ "aprender-graph 0.51.0",
  "aprender-orchestrate",
  "aprender-present-core 0.50.0",
  "aprender-rag",
@@ -7376,7 +7473,7 @@ dependencies = [
  "thiserror 2.0.18",
  "toml 0.9.12+spec-1.1.0",
  "tracing",
- "trueno 0.14.6",
+ "trueno",
  "uuid",
  "walkdir",
  "wasm-bindgen",
@@ -9200,37 +9297,6 @@ dependencies = [
  "serde_json",
  "thiserror 2.0.18",
  "toml 0.8.23",
-]
-
-[[package]]
-name = "trueno"
-version = "0.17.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9b290ee9696b82ac3aa61e45a10b31043888075e2bc89250f1ea14319c507ec8"
-dependencies = [
- "anyhow",
- "chrono",
- "hostname",
- "num_cpus",
- "provable-contracts-macros 0.2.2",
- "serde",
- "serde_json",
- "serde_yaml_ng",
- "thiserror 2.0.18",
- "toml 0.8.23",
- "trueno-gemm-codegen",
- "trueno-quant",
-]
-
-[[package]]
-name = "trueno-gemm-codegen"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8fdd672ad51d0a82906f91f38a6d37e8c671cae2eb9ae419f93e720d3f1bccda"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.117",
 ]
 
 [[package]]
